@@ -1,19 +1,18 @@
 -- Makes looting instant with no delay when auto loot is enabled
 
-local lastTime = 0
-local delay = 0.1
+SetCVar("autoLootRate", "0")
 
 local function loot()
-	local autoLoot = GetCVarBool("autoLootDefault")
-
-	if autoLoot then
-		if (GetTime() - lastTime) >= delay then
-			for slot = GetNumLootItems(), 1, -1 do
-				LootSlot(slot)
-			end
-
-			lastTime = GetTime()
+	if GetCVarBool("autoLootDefault") and not IsModifiedClick("AUTOLOOTTOGGLE") then
+		for slot = GetNumLootItems(), 1, -1 do
+			LootSlot(slot)
 		end
+		
+		C_Timer.After(0.1, function()
+			if GetNumLootItems() == 0 then
+				CloseLoot()
+			end
+		end)
 	end
 end
 
