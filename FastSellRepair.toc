@@ -1,0 +1,7 @@
+## Interface: 110200
+## Title: Fast Sell Repair
+## Notes: Auto-sells junk and auto-repairs gear at vendors
+## Author: MIYANKO
+## Version: 1.0.0
+
+FastSellRepair.lua
